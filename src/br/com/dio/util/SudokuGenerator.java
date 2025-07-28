@@ -115,62 +115,6 @@ public class SudokuGenerator {
     }
     
     /**
-     * Converte matriz int[][] para List<List<Space>>
-     */
-    private List<List<Space>> convertToSpacesList(int[][] solution, Difficulty difficulty) {
-        List<List<Space>> spaces = new ArrayList<>();
-        
-        // Primeiro, gera um puzzle removendo números da solução
-        int[][] puzzle = new int[BOARD_SIZE][BOARD_SIZE];
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            System.arraycopy(solution[i], 0, puzzle[i], 0, BOARD_SIZE);
-        }
-        
-        // Remove números baseado na dificuldade
-        if (difficulty != Difficulty.EASY || solution[0][0] == 0) { // Se não é um tabuleiro completo
-            int cellsToRemove = 81 - difficulty.getClues();
-            List<int[]> positions = new ArrayList<>();
-            
-            for (int i = 0; i < BOARD_SIZE; i++) {
-                for (int j = 0; j < BOARD_SIZE; j++) {
-                    positions.add(new int[]{i, j});
-                }
-            }
-            
-            Collections.shuffle(positions, random);
-            
-            for (int i = 0; i < cellsToRemove && i < positions.size(); i++) {
-                int[] pos = positions.get(i);
-                puzzle[pos[0]][pos[1]] = 0;
-            }
-        }
-        
-        // Converte para List<List<Space>>
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            spaces.add(new ArrayList<>());
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                int puzzleValue = puzzle[i][j];
-                int solutionValue = solution[i][j];
-                boolean isFixed = puzzleValue != 0;
-                
-                Space space = new Space(solutionValue, isFixed);
-                spaces.get(i).add(space);
-            }
-        }
-        
-        return spaces;
-    }
-    
-    /**
-     * Gera um valor esperado para uma posição específica (para debugging)
-     */
-    private int generateExpectedValue(int row, int col) {
-        // Para células vazias, gera um valor válido como "esperado"
-        // Isso é usado principalmente para debugging e validação
-        return ((row * 3 + row / 3 + col) % 9) + 1;
-    }
-    
-    /**
      * Verifica se um número pode ser colocado em uma posição específica
      */
     public static boolean isValidPlacement(int[][] board, int row, int col, int num) {
