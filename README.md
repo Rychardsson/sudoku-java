@@ -14,6 +14,7 @@ Um jogo de Sudoku completo desenvolvido em Java para consolidar conhecimentos em
 ## 🚀 Como Executar
 
 ### Pré-requisitos
+
 - Java 17 ou superior
 - Terminal com suporte a cores ANSI (Windows Terminal, PowerShell, Git Bash, etc.)
 
@@ -33,6 +34,7 @@ java -cp bin br.com.dio.Main
 ## 🎲 Como Jogar
 
 ### 1. **Iniciando um Novo Jogo**
+
 - Escolha a opção "1" no menu principal
 - Selecione o nível de dificuldade:
   - **Fácil**: 45 pistas (ideal para iniciantes)
@@ -41,11 +43,13 @@ java -cp bin br.com.dio.Main
   - **Expert**: 17 pistas (máximo desafio)
 
 ### 2. **Inserindo Números**
+
 - Use a opção "2" para colocar números
 - Informe coluna (0-8), linha (0-8) e o número (1-9)
 - O sistema valida automaticamente se o movimento é válido
 
 ### 3. **Sistema de Coordenadas**
+
 ```
    0 1 2   3 4 5   6 7 8
 0  . . . | . . . | . . .
@@ -62,6 +66,7 @@ java -cp bin br.com.dio.Main
 ```
 
 ### 4. **Funcionalidades Disponíveis**
+
 - **Visualizar jogo**: Mostra o tabuleiro atual com destaque para números fixos
 - **Verificar status**: Informa se há erros e o progresso atual
 - **Pedir dica**: Sugere um número válido para uma posição específica
@@ -80,6 +85,7 @@ O Sudoku é um quebra-cabeça lógico onde você deve preencher uma grade 9×9 c
 ## 🛠️ Arquitetura do Projeto
 
 ### Estrutura de Pacotes
+
 ```
 src/
 └── br/com/dio/
@@ -96,21 +102,25 @@ src/
 ### Conceitos de POO Aplicados
 
 #### 1. **Encapsulamento**
+
 - Atributos privados nas classes `Board`, `Space`
 - Métodos públicos para acesso controlado aos dados
 - Validações internas para manter integridade dos dados
 
 #### 2. **Abstração**
+
 - Interface simples para o usuário através da classe `Main`
 - Complexidade do algoritmo de geração oculta na classe `SudokuGenerator`
 - Métodos específicos para cada responsabilidade
 
 #### 3. **Composição**
+
 - `Board` contém uma lista de `Space`
 - `Space` encapsula estado e comportamento de cada célula
 - Relacionamento "tem-um" bem definido
 
 #### 4. **Enumerações**
+
 - `GameStatusEnum` para estados do jogo
 - `Difficulty` para níveis de dificuldade
 - Type-safety e código mais legível
@@ -118,21 +128,25 @@ src/
 ## 🔧 Funcionalidades Técnicas
 
 ### Geração de Puzzles
+
 - **Algoritmo de backtracking** para gerar soluções válidas
 - **Remoção estratégica** de números baseada na dificuldade
 - **Validação em tempo real** durante a geração
 
 ### Validação de Movimentos
+
 - **Verificação de linhas, colunas e quadrados 3×3**
 - **Detecção de conflitos** antes da inserção
 - **Feedback imediato** sobre validade dos movimentos
 
 ### Sistema de Dicas
+
 - **Análise do estado atual** do tabuleiro
 - **Sugestão de números válidos** para posições específicas
 - **Algoritmo inteligente** que considera todas as regras
 
 ### Interface do Usuário
+
 - **Cores ANSI** para melhor experiência visual
 - **Menus interativos** com navegação intuitiva
 - **Feedback visual** para ações do usuário
@@ -143,23 +157,27 @@ src/
 Este projeto consolida os seguintes conceitos:
 
 ### Programação Orientada a Objetos
+
 - ✅ **Classes e Objetos**: Modelagem de entidades do domínio
 - ✅ **Encapsulamento**: Proteção de dados e controle de acesso
 - ✅ **Composição**: Relacionamentos entre objetos
 - ✅ **Abstração**: Simplificação de interfaces complexas
 
 ### Estruturas de Dados
+
 - ✅ **Listas bidimensionais**: Representação do tabuleiro
 - ✅ **Collections**: Uso de List, Set, Map
 - ✅ **Algoritmos de busca**: Validação e geração de puzzles
 
 ### Manipulação de Métodos
+
 - ✅ **Métodos estáticos e de instância**
 - ✅ **Passagem de parâmetros**
 - ✅ **Retorno de valores**
 - ✅ **Sobrecarga de métodos**
 
 ### Interface de Terminal
+
 - ✅ **Entrada e saída formatada**
 - ✅ **Validação de entrada do usuário**
 - ✅ **Cores e formatação ANSI**
@@ -175,12 +193,12 @@ Este projeto consolida os seguintes conceitos:
 
 ## 📊 Níveis de Dificuldade
 
-| Nível | Pistas | Descrição |
-|-------|--------|-----------|
-| **Fácil** | 45 | Ideal para iniciantes, muitas pistas disponíveis |
-| **Médio** | 35 | Desafio moderado, requer lógica básica |
-| **Difícil** | 25 | Para jogadores experientes, requer técnicas avançadas |
-| **Expert** | 17 | Máximo desafio, mínimo de pistas possível |
+| Nível       | Pistas | Descrição                                             |
+| ----------- | ------ | ----------------------------------------------------- |
+| **Fácil**   | 45     | Ideal para iniciantes, muitas pistas disponíveis      |
+| **Médio**   | 35     | Desafio moderado, requer lógica básica                |
+| **Difícil** | 25     | Para jogadores experientes, requer técnicas avançadas |
+| **Expert**  | 17     | Máximo desafio, mínimo de pistas possível             |
 
 ## 🔄 Melhorias Futuras
 

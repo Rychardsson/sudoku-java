@@ -171,4 +171,26 @@ public class SudokuGenerator {
         }
         return true;
     }
+    
+    /**
+     * Converte matriz int[][] para List<List<Space>>
+     */
+    private List<List<Space>> convertToSpacesList(int[][] solution, int[][] puzzle) {
+        List<List<Space>> spaces = new ArrayList<>();
+        
+        // Converte para List<List<Space>>
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            spaces.add(new ArrayList<>());
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                int puzzleValue = puzzle[i][j];
+                int solutionValue = solution[i][j];
+                boolean isFixed = puzzleValue != 0;
+                
+                Space space = new Space(solutionValue, isFixed);
+                spaces.get(i).add(space);
+            }
+        }
+        
+        return spaces;
+    }
 }
