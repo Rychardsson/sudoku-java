@@ -22,19 +22,12 @@ public class Main {
     private static Board board;
     private final static int BOARD_LIMIT = 9;
     private final static SudokuGenerator generator = new SudokuGenerator();
-    
-    // Códigos de cores ANSI para terminal
-    private static final String RESET = "\u001B[0m";
-    private static final String RED = "\u001B[31m";
-    private static final String GREEN = "\u001B[32m";
-    private static final String YELLOW = "\u001B[33m";
-    private static final String BLUE = "\u001B[34m";
-    private static final String CYAN = "\u001B[36m";
-    private static final String BOLD = "\u001B[1m";
 
     public static void main(String[] args) {
-        System.out.println(BOLD + BLUE + "🎮 BEM-VINDO AO SUDOKU JAVA! 🎮" + RESET);
-        System.out.println(CYAN + "Desenvolvido para consolidar conhecimentos em POO" + RESET);
+        System.out.println("=========================================");
+        System.out.println("    BEM-VINDO AO SUDOKU JAVA!");
+        System.out.println("=========================================");
+        System.out.println("Desenvolvido para consolidar conhecimentos em POO");
         System.out.println();
         
         // Se argumentos foram passados, usa o método antigo
@@ -70,49 +63,49 @@ public class Main {
                     case 8 -> finishGame();
                     case 9 -> showStatistics();
                     case 0 -> {
-                        System.out.println(GREEN + "👋 Obrigado por jogar! Até logo!" + RESET);
+                        System.out.println("[!] Obrigado por jogar! Ate logo!");
                         System.exit(0);
                     }
-                    default -> System.out.println(RED + "❌ Opção inválida! Selecione uma opção do menu." + RESET);
+                    default -> System.out.println("[X] Opcao invalida! Selecione uma opcao do menu.");
                 }
             } catch (Exception e) {
-                System.out.println(RED + "❌ Entrada inválida! Digite apenas números." + RESET);
+                System.out.println("[X] Entrada invalida! Digite apenas numeros.");
                 scanner.nextLine(); // Limpa o buffer
             }
             
-            System.out.println("\n" + YELLOW + "Pressione Enter para continuar..." + RESET);
+            System.out.println("\nPressione Enter para continuar...");
             scanner.nextLine();
         }
     }
     
     private static void displayMainMenu() {
         System.out.println("\n" + "=".repeat(50));
-        System.out.println(BOLD + CYAN + "           🎯 MENU PRINCIPAL" + RESET);
+        System.out.println("           MENU PRINCIPAL");
         System.out.println("=".repeat(50));
-        System.out.println("1️⃣  - Iniciar um novo jogo");
-        System.out.println("2️⃣  - Colocar um número");
-        System.out.println("3️⃣  - Remover um número");
-        System.out.println("4️⃣  - Visualizar jogo atual");
-        System.out.println("5️⃣  - Verificar status do jogo");
-        System.out.println("6️⃣  - Pedir uma dica");
-        System.out.println("7️⃣  - Limpar jogo");
-        System.out.println("8️⃣  - Finalizar jogo");
-        System.out.println("9️⃣  - Ver estatísticas");
-        System.out.println("0️⃣  - Sair");
+        System.out.println("1  - Iniciar um novo jogo");
+        System.out.println("2  - Colocar um numero");
+        System.out.println("3  - Remover um numero");
+        System.out.println("4  - Visualizar jogo atual");
+        System.out.println("5  - Verificar status do jogo");
+        System.out.println("6  - Pedir uma dica");
+        System.out.println("7  - Limpar jogo");
+        System.out.println("8  - Finalizar jogo");
+        System.out.println("9  - Ver estatisticas");
+        System.out.println("0  - Sair");
         System.out.println("=".repeat(50));
-        System.out.print(BOLD + "Escolha uma opção: " + RESET);
+        System.out.print("Escolha uma opcao: ");
     }
     
     private static void startNewGame() {
         if (nonNull(board)) {
-            System.out.print(YELLOW + "⚠️  Já existe um jogo em andamento. Deseja começar um novo? (s/n): " + RESET);
+            System.out.print("[!] Ja existe um jogo em andamento. Deseja comecar um novo? (s/n): ");
             String response = scanner.nextLine().trim().toLowerCase();
             if (!response.equals("s") && !response.equals("sim")) {
                 return;
             }
         }
         
-        System.out.println(CYAN + "\n🎲 Escolha o nível de dificuldade:" + RESET);
+        System.out.println("\nEscolha o nivel de dificuldade:");
         System.out.println("1 - " + Difficulty.EASY.getLabel() + " (" + Difficulty.EASY.getClues() + " pistas)");
         System.out.println("2 - " + Difficulty.MEDIUM.getLabel() + " (" + Difficulty.MEDIUM.getClues() + " pistas)");
         System.out.println("3 - " + Difficulty.HARD.getLabel() + " (" + Difficulty.HARD.getClues() + " pistas)");
@@ -127,24 +120,24 @@ public class Main {
             default -> Difficulty.MEDIUM;
         };
         
-        System.out.println(YELLOW + "🔄 Gerando puzzle de nível " + selectedDifficulty.getLabel() + "..." + RESET);
+        System.out.println("Gerando puzzle de nivel " + selectedDifficulty.getLabel() + "...");
         
         List<List<Space>> spaces = generator.generatePuzzle(selectedDifficulty);
         board = new Board(spaces);
         
-        System.out.println(GREEN + "✅ Novo jogo iniciado com sucesso!" + RESET);
-        System.out.println(CYAN + "🎯 Nível: " + selectedDifficulty.getLabel() + RESET);
+        System.out.println("[OK] Novo jogo iniciado com sucesso!");
+        System.out.println("Nivel: " + selectedDifficulty.getLabel());
         showCurrentGame();
     }
     
     private static void getHint() {
         if (isNull(board)) {
-            System.out.println(RED + "❌ O jogo ainda não foi iniciado!" + RESET);
+            System.out.println("[X] O jogo ainda nao foi iniciado!");
             return;
         }
         
-        System.out.println(CYAN + "💡 Sistema de Dicas" + RESET);
-        System.out.println("Informe a posição onde deseja uma dica:");
+        System.out.println("\nSistema de Dicas");
+        System.out.println("Informe a posicao onde deseja uma dica:");
         
         System.out.print("Coluna (0-8): ");
         var col = runUntilGetValidNumber(0, 8);
@@ -155,34 +148,34 @@ public class Main {
         
         if (hint == null) {
             if (board.getSpaces().get(row).get(col).isFixed()) {
-                System.out.println(YELLOW + "⚠️  Esta posição já está preenchida e é fixa!" + RESET);
+                System.out.println("[!] Esta posicao ja esta preenchida e e fixa!");
             } else if (nonNull(board.getSpaces().get(row).get(col).getActual())) {
-                System.out.println(YELLOW + "⚠️  Esta posição já está preenchida!" + RESET);
+                System.out.println("[!] Esta posicao ja esta preenchida!");
             } else {
-                System.out.println(RED + "❌ Não foi possível encontrar uma dica para esta posição." + RESET);
+                System.out.println("[X] Nao foi possivel encontrar uma dica para esta posicao.");
             }
         } else {
-            System.out.println(GREEN + "💡 Dica: O número " + hint + " pode ser colocado na posição [" + col + "," + row + "]" + RESET);
+            System.out.println("[DICA] O numero " + hint + " pode ser colocado na posicao [" + col + "," + row + "]");
         }
     }
     
     private static void showStatistics() {
         if (isNull(board)) {
-            System.out.println(RED + "❌ O jogo ainda não foi iniciado!" + RESET);
+            System.out.println("[X] O jogo ainda nao foi iniciado!");
             return;
         }
         
-        System.out.println(CYAN + "\n📊 ESTATÍSTICAS DO JOGO" + RESET);
+        System.out.println("\nESTATISTICAS DO JOGO");
         System.out.println("=".repeat(30));
-        System.out.println("📈 Células preenchidas: " + board.getFilledCells() + "/81");
-        System.out.println("✅ Números corretos: " + board.getCorrectNumbers());
-        System.out.println("📊 Progresso: " + String.format("%.1f", (board.getFilledCells() / 81.0 * 100)) + "%");
-        System.out.println("🎯 Status: " + board.getStatus().getLabel());
+        System.out.println("Celulas preenchidas: " + board.getFilledCells() + "/81");
+        System.out.println("Numeros corretos: " + board.getCorrectNumbers());
+        System.out.println("Progresso: " + String.format("%.1f", (board.getFilledCells() / 81.0 * 100)) + "%");
+        System.out.println("Status: " + board.getStatus().getLabel());
         
         if (board.hasErrors()) {
-            System.out.println(RED + "❌ Existem erros no tabuleiro!" + RESET);
+            System.out.println("[X] Existem erros no tabuleiro!");
         } else {
-            System.out.println(GREEN + "✅ Nenhum erro detectado!" + RESET);
+            System.out.println("[OK] Nenhum erro detectado!");
         }
     }
 
@@ -190,10 +183,10 @@ public class Main {
     private static void runGameWithArguments(final Map<String, String> positions) {
         var option = -1;
         while (true){
-            System.out.println("Selecione uma das opções a seguir");
+            System.out.println("Selecione uma das opcoes a seguir");
             System.out.println("1 - Iniciar um novo Jogo");
-            System.out.println("2 - Colocar um novo número");
-            System.out.println("3 - Remover um número");
+            System.out.println("2 - Colocar um novo numero");
+            System.out.println("3 - Remover um numero");
             System.out.println("4 - Visualizar jogo atual");
             System.out.println("5 - Verificar status do jogo");
             System.out.println("6 - limpar jogo");
@@ -211,14 +204,14 @@ public class Main {
                 case 6 -> clearGame();
                 case 7 -> finishGame();
                 case 8 -> System.exit(0);
-                default -> System.out.println("Opção inválida, selecione uma das opções do menu");
+                default -> System.out.println("Opcao invalida, selecione uma das opcoes do menu");
             }
         }
     }
 
     private static void startGame(final Map<String, String> positions) {
         if (nonNull(board)){
-            System.out.println("O jogo já foi iniciado");
+            System.out.println("O jogo ja foi iniciado");
             return;
         }
 
@@ -235,57 +228,57 @@ public class Main {
         }
 
         board = new Board(spaces);
-        System.out.println("O jogo está pronto para começar");
+        System.out.println("O jogo esta pronto para comecar");
     }
 
 
     private static void inputNumber() {
         if (isNull(board)){
-            System.out.println(RED + "❌ O jogo ainda não foi iniciado!" + RESET);
+            System.out.println("[X] O jogo ainda nao foi iniciado!");
             return;
         }
 
-        System.out.println(CYAN + "\n🎯 Inserir Número" + RESET);
+        System.out.println("\nInserir Numero");
         System.out.print("Informe a coluna (0-8): ");
         var col = runUntilGetValidNumber(0, 8);
         System.out.print("Informe a linha (0-8): ");
         var row = runUntilGetValidNumber(0, 8);
-        System.out.print("Informe o número (1-9) para a posição [" + col + "," + row + "]: ");
+        System.out.print("Informe o numero (1-9) para a posicao [" + col + "," + row + "]: ");
         var value = runUntilGetValidNumber(1, 9);
         
         if (!board.changeValue(col, row, value)){
-            System.out.println(RED + "❌ A posição [" + col + "," + row + "] tem um valor fixo!" + RESET);
+            System.out.println("[X] A posicao [" + col + "," + row + "] tem um valor fixo!");
         } else {
             if (board.isValidMove(col, row, value)) {
-                System.out.println(GREEN + "✅ Número inserido com sucesso!" + RESET);
+                System.out.println("[OK] Numero inserido com sucesso!");
             } else {
-                System.out.println(YELLOW + "⚠️  Número inserido, mas pode haver conflito com as regras do Sudoku!" + RESET);
+                System.out.println("[!] Numero inserido, mas pode haver conflito com as regras do Sudoku!");
             }
         }
     }
 
     private static void removeNumber() {
         if (isNull(board)){
-            System.out.println(RED + "❌ O jogo ainda não foi iniciado!" + RESET);
+            System.out.println("[X] O jogo ainda nao foi iniciado!");
             return;
         }
 
-        System.out.println(CYAN + "\n🗑️ Remover Número" + RESET);
+        System.out.println("\nRemover Numero");
         System.out.print("Informe a coluna (0-8): ");
         var col = runUntilGetValidNumber(0, 8);
         System.out.print("Informe a linha (0-8): ");
         var row = runUntilGetValidNumber(0, 8);
         
         if (!board.clearValue(col, row)){
-            System.out.println(RED + "❌ A posição [" + col + "," + row + "] tem um valor fixo!" + RESET);
+            System.out.println("[X] A posicao [" + col + "," + row + "] tem um valor fixo!");
         } else {
-            System.out.println(GREEN + "✅ Número removido com sucesso!" + RESET);
+            System.out.println("[OK] Numero removido com sucesso!");
         }
     }
 
     private static void showCurrentGame() {
         if (isNull(board)){
-            System.out.println(RED + "❌ O jogo ainda não foi iniciado!" + RESET);
+            System.out.println("[X] O jogo ainda nao foi iniciado!");
             return;
         }
 
@@ -297,79 +290,79 @@ public class Main {
                 String displayValue;
                 
                 if (isNull(space.getActual())) {
-                    displayValue = "  "; // Célula vazia
+                    displayValue = "  "; // Celula vazia
                 } else if (space.isFixed()) {
-                    displayValue = BOLD + space.getActual() + RESET; // Números fixos em negrito
+                    displayValue = "*" + space.getActual(); // Numeros fixos com asterisco
                 } else {
-                    displayValue = " " + space.getActual(); // Números inseridos pelo usuário
+                    displayValue = " " + space.getActual(); // Numeros inseridos pelo usuario
                 }
                 
                 args[argPos++] = displayValue;
             }
         }
         
-        System.out.println(CYAN + "\n🎯 SEU JOGO ATUAL:" + RESET);
-        System.out.println(YELLOW + "Números em negrito são fixos, outros você pode modificar" + RESET);
+        System.out.println("\nSEU JOGO ATUAL:");
+        System.out.println("(*) Numeros fixos, outros voce pode modificar");
         System.out.printf((BOARD_TEMPLATE) + "\n", args);
     }
 
     private static void showGameStatus() {
         if (isNull(board)){
-            System.out.println(RED + "❌ O jogo ainda não foi iniciado!" + RESET);
+            System.out.println("[X] O jogo ainda nao foi iniciado!");
             return;
         }
 
-        System.out.println(CYAN + "\n📊 STATUS DO JOGO" + RESET);
-        System.out.println("🎯 Status atual: " + board.getStatus().getLabel());
+        System.out.println("\nSTATUS DO JOGO");
+        System.out.println("Status atual: " + board.getStatus().getLabel());
         
         if(board.hasErrors()){
-            System.out.println(RED + "❌ O jogo contém erros nas regras do Sudoku!" + RESET);
+            System.out.println("[X] O jogo contem erros nas regras do Sudoku!");
         } else {
-            System.out.println(GREEN + "✅ O jogo não contém erros!" + RESET);
+            System.out.println("[OK] O jogo nao contem erros!");
         }
         
-        System.out.println("📈 Progresso: " + board.getFilledCells() + "/81 células preenchidas");
+        System.out.println("Progresso: " + board.getFilledCells() + "/81 celulas preenchidas");
     }
 
     private static void clearGame() {
         if (isNull(board)){
-            System.out.println(RED + "❌ O jogo ainda não foi iniciado!" + RESET);
+            System.out.println("[X] O jogo ainda nao foi iniciado!");
             return;
         }
 
-        System.out.print(YELLOW + "⚠️  Tem certeza que deseja limpar seu jogo e perder todo seu progresso? (sim/não): " + RESET);
+        System.out.print("[!] Tem certeza que deseja limpar seu jogo e perder todo seu progresso? (sim/nao): ");
         var confirm = scanner.nextLine().trim().toLowerCase();
         
-        while (!confirm.equals("sim") && !confirm.equals("não") && !confirm.equals("s") && !confirm.equals("n")){
-            System.out.print("Por favor, informe 'sim' ou 'não': ");
+        while (!confirm.equals("sim") && !confirm.equals("nao") && !confirm.equals("s") && !confirm.equals("n")){
+            System.out.print("Por favor, informe 'sim' ou 'nao': ");
             confirm = scanner.nextLine().trim().toLowerCase();
         }
 
         if(confirm.equals("sim") || confirm.equals("s")){
             board.reset();
-            System.out.println(GREEN + "✅ Jogo limpo com sucesso!" + RESET);
+            System.out.println("[OK] Jogo limpo com sucesso!");
         } else {
-            System.out.println(CYAN + "🔄 Operação cancelada." + RESET);
+            System.out.println("Operacao cancelada.");
         }
     }
 
     private static void finishGame() {
         if (isNull(board)){
-            System.out.println(RED + "❌ O jogo ainda não foi iniciado!" + RESET);
+            System.out.println("[X] O jogo ainda nao foi iniciado!");
             return;
         }
 
         if (board.gameIsFinished()){
-            System.out.println(GREEN + BOLD + "\n🎉 PARABÉNS! VOCÊ CONCLUIU O SUDOKU! 🎉" + RESET);
+            System.out.println("\n*** PARABENS! VOCE CONCLUIU O SUDOKU! ***");
             showCurrentGame();
             showStatistics();
             board = null;
-            System.out.println(CYAN + "🔄 Pronto para um novo jogo!" + RESET);
+            System.out.println("Pronto para um novo jogo!");
         } else if (board.hasErrors()) {
-            System.out.println(RED + "❌ Seu jogo contém erros. Verifique o tabuleiro e corrija-os." + RESET);
+            System.out.println("[X] Seu jogo contem erros. Verifique o tabuleiro e corrija-os.");
             showGameStatus();
         } else {
-            System.out.println(YELLOW + "⚠️  Você ainda precisa preencher alguns espaços para completar o jogo." + RESET);
+            System.out.println("[!] Voce ainda precisa preencher alguns espacos para completar o jogo.");
             showStatistics();
         }
     }
@@ -384,10 +377,10 @@ public class Main {
                 if (current >= min && current <= max) {
                     return current;
                 } else {
-                    System.out.printf(RED + "❌ Informe um número entre %d e %d: " + RESET, min, max);
+                    System.out.printf("[X] Informe um numero entre %d e %d: ", min, max);
                 }
             } catch (Exception e) {
-                System.out.printf(RED + "❌ Entrada inválida! Informe um número entre %d e %d: " + RESET, min, max);
+                System.out.printf("[X] Entrada invalida! Informe um numero entre %d e %d: ", min, max);
                 scanner.nextLine(); // Limpa o buffer
             }
         }
