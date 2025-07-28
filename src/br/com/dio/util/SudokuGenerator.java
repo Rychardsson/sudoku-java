@@ -39,7 +39,7 @@ public class SudokuGenerator {
     public List<List<Space>> generateCompleteBoard() {
         int[][] solution = new int[BOARD_SIZE][BOARD_SIZE];
         generateSolution(solution);
-        return convertToSpacesList(solution, Difficulty.EASY); // Todas as células preenchidas para o tabuleiro completo
+        return convertToSpacesList(solution, solution); // Tabuleiro completo
     }
     
     /**
@@ -49,7 +49,7 @@ public class SudokuGenerator {
         int[][] solution = new int[BOARD_SIZE][BOARD_SIZE];
         generateSolution(solution);
         int[][] puzzle = createPuzzle(solution, difficulty);
-        return convertToSpacesList(puzzle, difficulty);
+        return convertToSpacesList(solution, puzzle);
     }
     
     /**
