@@ -35,4 +35,27 @@ public class Space {
     public boolean isFixed() {
         return fixed;
     }
+    
+    /**
+     * Verifica se o valor atual está correto
+     */
+    public boolean isCorrect() {
+        return actual != null && actual.equals(expected);
+    }
+    
+    /**
+     * Verifica se a célula está vazia
+     */
+    public boolean isEmpty() {
+        return actual == null;
+    }
+    
+    /**
+     * Representação em string para debugging
+     */
+    @Override
+    public String toString() {
+        return String.format("Space{actual=%s, expected=%d, fixed=%s}", 
+                           actual, expected, fixed);
+    }
 }
